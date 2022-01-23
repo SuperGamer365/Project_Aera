@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
 import Bot_token
-from cogs import music
+from cogs import music, mod
 
 bot = commands.Bot(command_prefix="$", intents=discord.Intents.all())
 
-cogs = [music]
+cogs = [music, mod]
 
 for i in range(len(cogs)):
     cogs[i].setup(bot)
