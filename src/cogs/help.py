@@ -1,0 +1,34 @@
+import discord
+from discord.ext import commands
+
+
+class help(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.group()
+    async def help(self, ctx):
+        embed = discord.Embed(
+            title="Help",
+            description="Below are the cogs that you can  be helped with."
+                        "Just type $help <Cog name>. After that, Aera will send out a "
+                        "list of the commands and their syntax and purpose",
+            color=discord.Colour.orange()
+        )
+
+        embed.add_field(
+            name="Moderator",
+            value="This cog is for people who have control of the server. Certain things like banning and kicing are "
+                  "avaliable "
+        )
+
+        embed.add_field(
+            name="Music",
+            value="This cog has commands that allows Aera to join and play music in voice channels"
+        )
+
+        await ctx.send(embed=embed)
+
+
+def setup(bot):
+    bot.add_cog(help(bot))
