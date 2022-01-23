@@ -1,0 +1,10 @@
+# the bot token file
+src/Bot_token.py
+pushtogithub.txt
+
+
+# Ide folder(s)
+.vscode/
+
+# pycache files
+**/__pycache__
