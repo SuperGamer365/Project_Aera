@@ -42,6 +42,18 @@ class mod(commands.Cog):
             except HTTPException:
                 await ctx.send("Banning {} failed, due to an HTTPException".format(member))
 
+    @commands.command()
+    async def unban(self, ctx, member: discord.Member):
+        guild = ctx.guild
+        try:
+            await guild.unban(user=member)
+
+        except Forbidden:
+            await ctx.send("You do not have the proper permissions to unban {}".format(member))
+
+        except HTTPException:
+            await ctx.send("Unbanning {} failed, due to an HTTPException".format(member))
+
 
 def setup(bot):
     bot.add_cog(mod(bot))
