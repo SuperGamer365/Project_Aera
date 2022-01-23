@@ -9,7 +9,8 @@ class mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command
+    @commands.command()
+    @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason: typing.Optional[str]):
         guild = ctx.guild
         if member == ctx.author:
@@ -19,11 +20,27 @@ class mod(commands.Cog):
             try:
                 await guild.kick(user=member, reason=reason)
 
-            except Forbidden as e:
+            except Forbidden:
                 await ctx.send("You do not have the proper permissions to kick {}".format(member))
 
-            except HTTPException as e:
+            except HTTPException:
                 await ctx.send("Kicking {} failed, due to an HTTPException".format(member))
+
+    @commands.command()
+    async def ban(self, ctx, member: discord.Member, *, reason: str, delete_days: typing.Optional[int]):
+        guild = ctx.guild
+        if member == ctx.author:
+            await ctx.send("You cannot ban yourself")
+
+        else:
+            try:
+                await guild.ban(user=member, reason=reason, delete_message_days=delete_days)
+
+            except Forbidden:
+                await ctx.send("You do not have the proper permissions to ban {}".format(member))
+
+            except HTTPException:
+                await ctx.send("Banning {} failed, due to an HTTPException".format(member))
 
 
 def setup(bot):
