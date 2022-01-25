@@ -6,7 +6,7 @@ class help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.group()
+    @commands.group(invoke_without_command=True, case_insensitive="True")
     async def help(self, ctx):
         embed = discord.Embed(
             title="Help",
@@ -25,6 +25,32 @@ class help(commands.Cog):
         embed.add_field(
             name="Music",
             value="This cog has commands that allows Aera to join and play music in voice channels"
+        )
+
+        await ctx.send(embed=embed)
+
+    @help.command()
+    async def Moderator(self, ctx):
+        embed = discord.Embed(
+            title="Moderator Commands",
+            description="These commands moderate the server by banning, kicking, etc.",
+            color=discord.Colour.blue()
+        )
+
+        embed.add_field(
+            name="Kick",
+            value="Kicking kicks the targeted user. Syntax is $kick [targeted member]<reason>"
+        )
+
+        embed.add_field(
+            name="Ban",
+            value="Banning bans the targeted user. Syntax is $ban [targeted member]<reason>"
+        )
+
+        embed.add_field(
+            name="Purge",
+            value="Purging deletes the selected number of messages including the command request. Syntax is "
+                  "$purge [message amount] "
         )
 
         await ctx.send(embed=embed)
