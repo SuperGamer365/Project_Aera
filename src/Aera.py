@@ -3,7 +3,7 @@ from discord.ext import commands
 import Bot_token
 from cogs import music, mod, help
 
-bot = commands.Bot(command_prefix="$", intents=discord.Intents.all())
+bot = commands.Bot(command_prefix="$", intents=discord.Intents.all(), activity=discord.Game(name="Commands: $help"))
 bot.remove_command('help')
 
 cogs = [music, mod, help]
