@@ -1,1 +1,2 @@
 discord.py
+ffmpeg (Either the executable must be in the directory or the bin folder of ffmpeg must be a path variable)
