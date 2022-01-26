@@ -53,6 +53,11 @@ class help(commands.Cog):
                   "$purge [message amount] "
         )
 
+        embed.add_field(
+            name="Nuke",
+            value="Deletes all the messages in a channel. Syntax is $nuke <mention channel>"
+        )
+
         await ctx.send(embed=embed)
 
 

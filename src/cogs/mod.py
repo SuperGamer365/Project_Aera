@@ -42,6 +42,8 @@ class mod(commands.Cog):
             except HTTPException:
                 await ctx.send("Banning {} failed, due to an HTTPException".format(member))
 
+
+  #(Channel commands)-------------------------------------------------------------------------------------------------
     @commands.command()
     async def purge(self, ctx, limit: int):
         try:
@@ -55,6 +57,24 @@ class mod(commands.Cog):
 
         except HTTPException:
             await ctx.send("Purging {} messages couldn't work due to an HTTPException".format(limit))
+
+
+    @commands.command()
+    async def nuke(self, ctx, channel: discord.TextChannel = None):
+        #some checks
+        if channel is None: #checking to see if the instance of the channel is the same as the nonetype, esstentially checking if a channel name was provided
+            await ctx.send("Mention a channel to nuke it")
+            return
+        try:
+            await channel.purge(bulk=True)
+            await channel.send("{0} purged by {1}".format(channel, ctx.author))
+        except Forbidden:
+            await ctx.send(
+                "You must have the manage_messages permission to delete messages even if they are your own."
+                "The read_message_history permission is also needed to retrieve message history."
+            )
+        except HTTPException:
+            await ctx.send("Nuking channel {} couldn't work due to an HTTPException".format(channel))
 
 
 def setup(bot):
